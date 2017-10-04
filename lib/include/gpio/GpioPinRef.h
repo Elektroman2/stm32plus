@@ -46,6 +46,7 @@ namespace stm32plus {
       bool operator!=(const GpioPinRef& src) const;
 
       Gpio::GpioModeType getMode() const;
+      void setMode(Gpio::GpioModeType mode=Gpio::INPUT, Gpio::GpioOutputType outputtype=Gpio::OPEN_DRAIN, Gpio::GpioPullUpDownType pullupdown=Gpio::PUPD_UP);
   };
 
 
@@ -196,4 +197,13 @@ namespace stm32plus {
   inline Gpio::GpioModeType GpioPinRef::getMode() const {
     return Gpio::getMode(_peripheralAddress,_pin);
   }
+
+  /**
+    * Set the pin mode type (input,output,analog,alternate function)
+    * @return none
+    */
+
+   inline void GpioPinRef::setMode(Gpio::GpioModeType mode, Gpio::GpioOutputType outputtype, Gpio::GpioPullUpDownType pullupdown) {
+     return Gpio::setMode(_peripheralAddress,_pin,mode, outputtype,pullupdown);
+   }
 }
