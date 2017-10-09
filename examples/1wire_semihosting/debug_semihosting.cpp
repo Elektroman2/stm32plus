@@ -13,10 +13,12 @@
  */
 
 #define SEMIHOSTING
+#include "string/StringUtil.h"
+#include "stream/OutputStream.h"
+#include "stream/TextOutputStream.h"
 
 
 #include "config/stm32plus.h"
-#include "string/StringUtil.h"
 #include "config/gpio.h"
 #include "config/timing.h"
 #include "config/debug.h"
@@ -54,8 +56,8 @@ using namespace stm32plus;
  *
  * Tested on devices:
  *   STM32F030R8T6
- *   STM32F042F6P6
  *   STM32F051R8T6
+ *   STM103F32C8T6
  *   STM32F100RBT6
  *   STM32F407VGT6
  */
@@ -71,7 +73,9 @@ class SemiHostingTest {
     void run() {
 
       // initialise the pin for output
-    	GpioB<>::releaseJtagPinsForGpio();
+      GpioB<>::releaseJtagPinsForGpio();
+
+
       GpioB<DefaultDigitalOutputFeature<LED_PIN> > pc;
 
       // loop forever switching it on and off with a 1 second
